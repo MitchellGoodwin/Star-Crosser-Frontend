@@ -34,12 +34,16 @@ Shows all the other users, automatically filtered by gender preferences. Click o
 * Filter by todays horroscope
 * Lazy loading
 
+![explore](wireframe/1-Explore.png)
+
 ### /profile/:id
 
 Shows a profile page for another user.
 Has a button to like that user, and a button to send them a message.
 
 * Stetch goal: Button to block user
+
+![profile](wireframe/2-Profile.png)
 
 ### /my-sign
 
@@ -48,6 +52,8 @@ Shows the current user's zodiac sign, with information about it.
 * Stretch Goals:
 * Show info on their current daily compatable sign.
 * Add a form to get their info to find their whole birthchart, then show that information.
+
+![sign](wireframe/2-Profile.png)
 
 ### /inbox
 
@@ -64,6 +70,8 @@ Redux store will do a lot here.
 * Implement websockets for live messaging
 * Make it so they can't send a second message without a match from the other user.
 * Can't message/ see users who have blocked you
+
+![inbox](wireframe/4-Inbox.png)
 
 ## Header
 
