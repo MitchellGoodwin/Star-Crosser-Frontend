@@ -13,8 +13,11 @@ import LoginForm from './Auth/LoginForm';
 import Welcome from './components/Welcome'
 import SignUp from './Auth/SignUp'
 import Header from './containers/Header';
+import CheckLogin from './Auth/CheckLogin';
+
 import { Menu, Icon, Sidebar } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import UserEdit from './containers/UserEdit';
 
 const URL = 'http://localhost:3000'
 
@@ -68,10 +71,12 @@ class App extends React.Component {
                 </Menu.Item>
               </Link>
 
-            <Menu.Item as='a'>
-              <Icon name='gamepad' />
-              Games
-            </Menu.Item>
+            <Link to='/my-profile'>
+              <Menu.Item as='a'>
+                <Icon name='user' />
+                Profile
+              </Menu.Item>
+            </Link>
 
             <Link to='/logout'>
               <Menu.Item as='a'>
@@ -83,30 +88,35 @@ class App extends React.Component {
 
             </Sidebar>
 
-            <Sidebar.Pusher>
-          <Switch>
+            <Sidebar.Pusher dimmed={this.props.sideBar} onClick={this.props.sideBar ? () => this.props.dispatch({type: 'TOGGLE_SIDEBAR'}) : null}>
+                  <div className='body-app' >
+                <Switch>
+                  <Route exact path='/' component={() => {
+                      return <Welcome />
+                      }} />
 
-            <Route exact path='/' component={() => {
-                return <Welcome />
-                }} />
+                  <Route exact path='/login' component={() => {
+                        return <LoginForm />
+                      }} />
+                  
+                  <Route exact path='/signup' component={() => {
+                      return <SignUp />
+                      }} />
 
-            <Route exact path='/login' component={() => {
-                  return <LoginForm />
-                }} />
-            
-            <Route exact path='/signup' component={() => {
-                return <SignUp />
-                }} />
+                  <Route exact path='/my-profile' component={() => {
+                      return <CheckLogin component={UserEdit} />
+                      }} />
 
-            <Route exact path='/logout' component={() => {
-                this.handleLogout()
-                return <Redirect to='/' />
-              }} />
+                  <Route exact path='/logout' component={() => {
+                      this.handleLogout()
+                      return <Redirect to='/' />
+                    }} />
 
-            <Route>
-              <Redirect to='/' />
-            </Route>
-          </Switch>
+                  <Route>
+                    <Redirect to='/' />
+                  </Route>
+                </Switch>
+                  </div>
           </Sidebar.Pusher>
           </Sidebar.Pushable>
         </Router>
