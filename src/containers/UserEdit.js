@@ -10,7 +10,7 @@ class UserEdit extends React.Component{
         return(
             <Grid >
                 <Grid.Column width={4}>
-                    <UserLeftColumn/>
+                    <UserLeftColumn user={this.props.user} sun_sign={this.props.sun_sign}/>
                 </Grid.Column>
 
                 <Grid.Column width={9}>
@@ -23,4 +23,11 @@ class UserEdit extends React.Component{
 
 }
 
-export default connect()(UserEdit)
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+        sun_sign: state.auth.user.sun_sign
+    }
+}
+
+export default connect(mapStateToProps)(UserEdit)

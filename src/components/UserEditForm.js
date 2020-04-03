@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 
 import { Button, Form, Segment, TextArea } from 'semantic-ui-react'
 
@@ -18,18 +19,19 @@ class UserEditForm extends React.Component{
         })
     }
 
-    componentDidUpdate = () => {
-        if (!this.props.initialValues && this.props.oldUser.id) {
-            const user = {...this.props.oldUser}
-            user.city = user.location.split(', ')[0]
-            user.state = user.location.split(', ')[1]
-            user.country = user.location.split(', ')[2]
-            this.props.dispatch({type: 'SET_USER', user: user})
-        }
-    }
 
     componentDidMount = () => {
         this.props.dispatch({type: 'RESET_FORM'})
+        setTimeout(() => {
+            if (!this.props.initialValues && this.props.oldUser.id) {
+                const user = {...this.props.oldUser}
+                user.city = user.location.split(', ')[0]
+                user.state = user.location.split(', ')[1]
+                user.country = user.location.split(', ')[2]
+                this.props.dispatch({type: 'SET_USER', user: user})
+            }
+
+        }, 500)
     }
 
     handleSubmit = (e) => {
@@ -57,7 +59,7 @@ class UserEditForm extends React.Component{
     render(){
         return(
             <div>
-                <h1>Fill out your profile info:</h1> <Button>Preview Profile</Button>
+                <h1>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
                 <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised>
 

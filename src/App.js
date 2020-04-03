@@ -18,6 +18,7 @@ import CheckLogin from './Auth/CheckLogin';
 import { Menu, Icon, Sidebar } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import UserEdit from './containers/UserEdit';
+import User from './containers/User'
 
 const URL = 'http://localhost:3000'
 
@@ -65,21 +66,21 @@ class App extends React.Component {
             direction='right'
           >
               <Link to='/'>
-                <Menu.Item as='a'>
+                <Menu.Item >
                   <Icon name='home' />
                   Home
                 </Menu.Item>
               </Link>
 
             <Link to='/my-profile'>
-              <Menu.Item as='a'>
+              <Menu.Item>
                 <Icon name='user' />
                 Profile
               </Menu.Item>
             </Link>
 
             <Link to='/logout'>
-              <Menu.Item as='a'>
+              <Menu.Item>
                 <Icon name='sign-out' />
                 Log Out
               </Menu.Item>
@@ -111,6 +112,8 @@ class App extends React.Component {
                       this.handleLogout()
                       return <Redirect to='/' />
                     }} />
+
+                  <Route path='/profile/:id' render={routerProps => <User {...routerProps}/>}/>
 
                   <Route>
                     <Redirect to='/' />
