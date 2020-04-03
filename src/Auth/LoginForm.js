@@ -4,6 +4,9 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 
 import { withRouter } from 'react-router';
 
+import { connect } from 'react-redux';
+// import { loginUser } from '../actions/authActions'
+
 const URL = 'http://localhost:3000'
 
 class Login extends React.Component {
@@ -19,20 +22,22 @@ class Login extends React.Component {
     }
 
     handleSubmit = (e) => {
-    e.preventDefault()
-
-    fetch(URL + '/login',{
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user: this.state })
-    })
-    .then(res => res.json())
-    .then(data => {
-        localStorage.setItem('auth_token',data.jwt)
-        this.props.history.push('/')
-    })
+        e.preventDefault()
+        fetch(URL + '/login',{
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user: this.state })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.jwt !== 'undefined') {
+                localStorage.setItem('auth_token',data.jwt)
+            }
+            this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+            this.props.history.push('/')
+        })
     }
 
     render(){
@@ -64,4 +69,10 @@ class Login extends React.Component {
     }
 }
 
-export default withRouter(Login);
+// const mapDispatchToProps = dispatch => {
+//     // return {
+//     //     loginUser: () => dispatch(loginUser())
+//     // }
+// }
+
+export default connect(null)(withRouter(Login));
