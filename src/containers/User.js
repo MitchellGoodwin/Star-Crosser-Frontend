@@ -30,10 +30,6 @@ class User extends React.Component{
 
                 <Grid.Column width={9}>
                     <UserShowInfo user={this.state.user} loading={this.state.loading}>
-                        <Dimmer active={this.state.loading}>
-                            <Loader active={this.state.loading} size='massive'/>
-                        </Dimmer>
-
                     </UserShowInfo>
 
                 </Grid.Column>

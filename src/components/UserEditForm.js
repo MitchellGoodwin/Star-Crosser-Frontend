@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 
-import { Button, Form, Segment, TextArea } from 'semantic-ui-react'
+import { Button, Form, Segment, TextArea, Loader, Dimmer } from 'semantic-ui-react'
 
 const URL = 'http://localhost:3000'
 
@@ -59,6 +59,9 @@ class UserEditForm extends React.Component{
     render(){
         return(
             <div>
+                <Dimmer active={!this.props.initialValues}>
+                        <Loader active={!this.props.initialValues} size='massive'/>
+                </Dimmer>
                 <h1>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
                 <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised>
