@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Welcome extends React.Component{
     render() {
         return(
-            <div>Welcome {this.props.user.firstName ? this.props.user.firstName : null}</div>
+            <div>Welcome {this.props.user.firstName ? this.props.user.firstName : 'Please Log In or Sign Up!'}</div>
         )
     }
 }

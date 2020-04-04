@@ -19,6 +19,8 @@ import { Menu, Icon, Sidebar } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import UserEdit from './containers/UserEdit';
 import User from './containers/User'
+import SignInfo from './components/SignInfo';
+import Sign from './containers/Sign';
 
 const URL = 'http://localhost:3000'
 
@@ -79,6 +81,13 @@ class App extends React.Component {
               </Menu.Item>
             </Link>
 
+            <Link to='/my-sign'>
+              <Menu.Item>
+                <Icon name='sun' />
+                My Sun Sign
+              </Menu.Item>
+            </Link>
+
             <Link to='/logout'>
               <Menu.Item>
                 <Icon name='sign-out' />
@@ -108,12 +117,19 @@ class App extends React.Component {
                       return <CheckLogin component={UserEdit} />
                       }} />
 
+                  <Route exact path='/my-sign' component={() => {
+                      return <CheckLogin component={() => {
+                      return <SignInfo sunSign={this.props.sunSign}/>}} />
+                  }}/>
+
                   <Route exact path='/logout' component={() => {
                       this.handleLogout()
                       return <Redirect to='/' />
                     }} />
 
                   <Route path='/profile/:id' render={routerProps => <User {...routerProps}/>}/>
+
+                  <Route path='/sign/:id' render={routerProps => <Sign {...routerProps}/>}/>
 
                   <Route>
                     <Redirect to='/' />
@@ -128,7 +144,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { sideBar: state.sideBar.sideBar }
+  return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign }
 }
 
 export default connect(mapStateToProps)(App);

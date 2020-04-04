@@ -36,4 +36,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect()(UserLeftColumn)
+export default connect(mapStateToProps)(UserLeftColumn)

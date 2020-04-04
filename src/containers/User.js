@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Grid, Loader, Dimmer } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import UserLeftColumn from '../components/UserLeftColumn';
 import UserShowInfo from '../components/UserShowInfo';
 
