@@ -1,6 +1,7 @@
 import React from 'react'
 import { Segment, Loader, Dimmer } from 'semantic-ui-react'
 
+
 class UserShowInfo extends React.Component{
     
     render(){
@@ -9,7 +10,7 @@ class UserShowInfo extends React.Component{
                 <Dimmer active={this.props.loading}>
                     <Loader active={this.props.loading} size='massive'/>
                 </Dimmer>
-                <h1>{this.props.user.firstName}</h1>
+                <h1>{this.props.user.firstName} {this.props.user.lastName}</h1>
                 <h2>Location: </h2>
                 <p>{this.props.user.location}</p>
                 {this.props.user.bioIntro ? 

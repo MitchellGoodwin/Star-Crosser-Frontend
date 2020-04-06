@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 import UserCard from '../components/UserCard'
 
+
 const URL = 'http://localhost:3000'
 
 class UsersContainer extends React.Component{
@@ -26,7 +27,7 @@ class UsersContainer extends React.Component{
 
     render() {
         return(
-            <Card.Group>
+            <Card.Group itemsPerRow='2'>
                 {this.state.users.map(user => {return <UserCard user={user} />})}
             </Card.Group>
         )

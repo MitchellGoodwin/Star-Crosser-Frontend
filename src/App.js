@@ -82,6 +82,13 @@ class App extends React.Component {
               </Menu.Item>
             </Link>
 
+            <Link to='/explore'>
+              <Menu.Item>
+                <Icon name='binoculars' />
+                Explore
+              </Menu.Item>
+            </Link>
+
             <Link to='/my-sign'>
               <Menu.Item>
                 <Icon name='sun' />
