@@ -22,6 +22,7 @@ import User from './containers/User'
 import SignInfo from './components/SignInfo';
 import Sign from './containers/Sign';
 import UsersContainer from './containers/UsersContainer';
+import Inbox from './containers/Inbox';
 
 const URL = 'http://localhost:3000'
 
@@ -96,6 +97,13 @@ class App extends React.Component {
               </Menu.Item>
             </Link>
 
+            <Link to='/inbox'>
+              <Menu.Item>
+                <Icon name='mail' />
+                Inbox
+              </Menu.Item>
+            </Link>
+
             <Link to='/logout'>
               <Menu.Item>
                 <Icon name='sign-out' />
@@ -133,6 +141,10 @@ class App extends React.Component {
                       return <CheckLogin component={() => {
                       return <SignInfo sunSign={this.props.sunSign}/>}} />
                   }}/>
+
+                  <Route exact path='/inbox' component={() => {
+                      return <CheckLogin component={Inbox} />
+                      }} />
 
                   <Route exact path='/logout' component={() => {
                       this.handleLogout()
