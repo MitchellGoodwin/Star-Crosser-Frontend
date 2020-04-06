@@ -1,5 +1,6 @@
 import React from 'react'
 import SignInfo from '../components/SignInfo'
+import { Loader } from 'semantic-ui-react'
 
 
 const URL = 'http://localhost:3000'
@@ -18,7 +19,11 @@ class Sign extends React.Component{
     
     render(){
         return(
-            <SignInfo sunSign={this.state.sign} />
+            <div>
+                {this.state.sign.id ?
+                <SignInfo sunSign={this.state.sign} /> 
+                : <Loader active='true' size='massive'></Loader>}
+            </div>
         )
     }
 }

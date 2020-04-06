@@ -7,7 +7,7 @@ class SignInfo extends React.Component{
         return(
             <Segment style={{width : 1200}}>
                 <Dimmer active={!this.props.sunSign}><Loader/></Dimmer>
-                {this.props.sunSign.name ?
+                {this.props.sunSign ?
                 <div>
                     <h1>{sunSign.name}</h1>
                     <p>{`A sign of the ${sunSign.element} element, ${sunSign.name}'s symbol is the ${sunSign.symbol.split(' ')[1]}.`}</p>

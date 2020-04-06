@@ -21,6 +21,7 @@ import UserEdit from './containers/UserEdit';
 import User from './containers/User'
 import SignInfo from './components/SignInfo';
 import Sign from './containers/Sign';
+import UsersContainer from './containers/UsersContainer';
 
 const URL = 'http://localhost:3000'
 
@@ -115,6 +116,10 @@ class App extends React.Component {
 
                   <Route exact path='/my-profile' component={() => {
                       return <CheckLogin component={UserEdit} />
+                      }} />
+
+                  <Route exact path='/explore' component={() => {
+                      return <CheckLogin component={UsersContainer} />
                       }} />
 
                   <Route exact path='/my-sign' component={() => {
