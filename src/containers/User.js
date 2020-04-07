@@ -18,7 +18,7 @@ class User extends React.Component{
     componentDidMount = () => {
 
         setTimeout(() => {
-            if (this.props.match.params.id == this.props.currentUser.id) {
+            if (parseInt(this.props.match.params.id) === parseInt(this.props.currentUser.id)) {
                 this.setState({user: this.props.currentUser, loading: false})
             } else {
                 fetch(URL + '/users/' + this.props.match.params.id,{

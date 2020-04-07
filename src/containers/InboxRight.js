@@ -9,9 +9,9 @@ class InboxRight extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className='inboxR'>
                 <MessageContainer selected_user={this.props.selected_user} messages={this.props.messages}/>
-                <NewMessage handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit} text={this.props.text}/>
+                <NewMessage canMessage={this.props.canMessage} handleChange={this.props.handleChange} handleSubmit={this.props.handleSubmit} text={this.props.text}/>
             </div>
         )
     }

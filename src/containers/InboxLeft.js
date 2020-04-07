@@ -24,8 +24,8 @@ class InboxLeft extends React.Component{
         }
 
         return(
-            <div>
-                <Button.Group fluid>
+            <div className='inboxL'>
+                <Button.Group fluid className='inbox-LButtons'>
                     <Button 
                         color={this.state.toggle === 'likes'? 'green' : 'red'}
                             onClick={this.handleToggle}>
@@ -35,7 +35,9 @@ class InboxLeft extends React.Component{
                             onClick={this.handleToggle}>
                         Matches</Button>
                 </Button.Group>
-                {users().map(user => <InboxUserCard user={user} handleSelect={this.props.handleSelect}/>)}
+                <div className='inbox-users'>
+                    {users().map(user => <InboxUserCard user={user} handleSelect={this.props.handleSelect}/>)}
+                </div>
             </div>
         )
     }

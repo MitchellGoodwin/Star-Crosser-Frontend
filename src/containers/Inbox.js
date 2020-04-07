@@ -13,6 +13,7 @@ class Inbox extends React.Component{
         matched_users: [],
         selected_user: [],
         messages: [],
+        canMessage: false,
         text: ''
     }
 
@@ -26,7 +27,10 @@ class Inbox extends React.Component{
             })
         .then(resp => resp.json())
         .then(messages => {
-            this.setState({messages: messages, selected_user: user})
+            let messStatus
+            (this.state.matched_users.filter(m => parseInt(m.id) === parseInt(user.id)).length === 1) || (messages.filter(message => parseInt(message.receiver.id) === parseInt(user.id) ).length === 0) ?
+            messStatus = true : messStatus = false
+            return this.setState({messages: messages, selected_user: user, canMessage: messStatus})
         })
     }
 
@@ -44,10 +48,19 @@ class Inbox extends React.Component{
             },
             body: JSON.stringify({ text: this.state.text, receiver_id: this.state.selected_user.id })
         }).then(resp => resp.json())
-        .then(message => this.setState({
+        .then(message => {
+            let messStatus
+            this.state.matched_users.filter(m => parseInt(m.id) === (parseInt(this.state.selected_user.id))).length === 1 ?
+                messStatus = true :
+                messStatus = false
+            
+            this.setState({
             messages: [...this.state.messages, message],
-            text: ''
-        }))
+            text: '',
+            canMessage: messStatus
+        })
+    }
+        )
     }
 
     componentDidMount = () => {
@@ -67,12 +80,12 @@ class Inbox extends React.Component{
 
     render() {
         return(
-            <Grid>
+            <Grid className='inbox'>
                 <Grid.Column width='4'>
                     <InboxLeft liked_users={this.state.liked_users} matched_users={this.state.matched_users} handleSelect={this.handleSelect}/>
                 </Grid.Column>
                 <Grid.Column width='10'>
-                    <InboxRight handleChange={this.handleChange} handleSubmit={this.handleSubmit} text={this.state.text} messages={this.state.messages} selected_user={this.state.selected_user}/>
+                    <InboxRight canMessage={this.state.canMessage} handleChange={this.handleChange} handleSubmit={this.handleSubmit} text={this.state.text} messages={this.state.messages} selected_user={this.state.selected_user}/>
 
                 </Grid.Column>
             </Grid>

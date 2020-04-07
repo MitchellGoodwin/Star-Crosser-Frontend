@@ -37,8 +37,82 @@
   }
 } */
 
+/* .header{
+  margin-bottom: 0px;
+} */
+
+.sidebar{
+  /* position: fixed !important;
+  top: -10px !important; */
+}
+
 .body-app{
   width: 100% !important;
   margin-left: 50px;
   padding-bottom: 150px;
+  height: 90vh !important;
+}
+
+.inbox{
+  height: 100%;
+}
+
+.inboxL{
+  height: 80vh;
+  border-style: solid;
+  padding: 10px;
+}
+
+.inbox-LButtons{
+  height: 7%;
+}
+
+.inbox-users{
+  overflow-y: auto;
+  height: 93%;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.inboxR{
+  height: 85vh;
+  border-style: solid;
+  padding: 10px;
+}
+
+.inboxMessages{
+  height: 70%;
+  overflow-y: auto;
+  border-style: solid;
+}
+
+.inboxForm{
+  height: 20%;
+}
+
+.messageSent{
+  float: right;
+  margin-right: 10px;
+}
+
+.messageReceived{
+  float: left;
+  margin-left: 10px;
+}
+
+.messageSent .messagein{
+  background-color: #92a8d1 !important;
+}
+
+.messageReceived .messagein{
+  background-color: #db9c15 !important;
+}
+
+
+
+.message{
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
 }

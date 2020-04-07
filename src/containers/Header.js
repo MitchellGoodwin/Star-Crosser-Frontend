@@ -38,9 +38,19 @@ const SiteHeader = (props) => {
         )
     }
 
+    const HeaderColor = () => {
+        return props.user.sun_sign ? 
+        props.user.sun_sign.element === 'Fire' ? 'red' 
+        : props.user.sun_sign.element === 'Water' ? 'blue'
+        : props.user.sun_sign.element === 'Earth' ? 'yellow'
+        : props.user.sun_sign.element === 'Air' ? 'green'
+        : 'black'
+        : 'black'
+    }
+
 
     return (
-    <Segment clearing inverted>
+    <Segment clearing inverted className='header' color={HeaderColor()}>
         <Header as='h1' floated='left'>
             StarCrosser
         </Header>

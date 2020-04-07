@@ -68,6 +68,7 @@ class App extends React.Component {
             visible={this.props.sideBar}
             width='thin'
             direction='right'
+            className='sidebar'
           >
               <Link to='/'>
                 <Menu.Item >

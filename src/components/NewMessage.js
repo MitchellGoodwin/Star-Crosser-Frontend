@@ -7,18 +7,21 @@ class NewMessage extends React.Component{
 
 
     render(){
+
+        const errorMessage = 'You can only send one message to an unmatched user. Make sure the first message is a good one!'
+
         return(
-            <Form onSubmit={this.props.handleSubmit}>
+            <Form onSubmit={this.props.handleSubmit} className='inboxForm'>
                 <Segment>
                     <Form.Field>
                             <label>New Message</label>
                             <TextArea type="textarea" 
                                 name='text' 
                                     placeholder="Enter text..." 
-                                        onChange={this.props.handleChange}
-                                            value={this.props.text} />
+                                        onChange={this.props.canMessage ? this.props.handleChange : null}
+                                            value={this.props.canMessage ? this.props.text : errorMessage} />
                     </Form.Field>
-                    <Button type='submit'>Submit</Button>
+                    <Button disabled={!this.props.canMessage} type='submit'>Submit</Button>
                 </Segment>
             </Form>
         )

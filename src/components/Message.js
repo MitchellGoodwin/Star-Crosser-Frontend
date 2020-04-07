@@ -6,20 +6,23 @@ class Message extends React.Component{
 
     render() {
         const { message, selected_user } = this.props
+        const received = message.receiver.id === selected_user.id ? false : true
         return(
-            <Card>
-                <Card raised >
-                    <Card.Content>
+            <div className='message'>
+            <Card className={received ? 'messageReceived' : 'messageSent'} >
+                <Card raised className='messageout'>
+                    <Card.Content className='messagein'>
                     <Image
                         avatar
-                        floated={message.receiver.id === selected_user.id ? 'right' : 'left'}
+                        floated={received ? 'left' : 'right'}
                         size='small'
-                        src={message.receiver.id === selected_user.id ? this.props.currentUser.picture : selected_user.picture}
+                        src={!received ? this.props.currentUser.picture : selected_user.picture}
                     />
-                    <Card.Description>{message.text}</Card.Description>
+                    <Card.Description >{message.text}</Card.Description>
                     </Card.Content>
             </Card>
             </Card>
+            </div>
         )
     }
 }
