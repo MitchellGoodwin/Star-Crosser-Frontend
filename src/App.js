@@ -26,7 +26,6 @@ import Inbox from './containers/Inbox';
 
 import { checkUser } from './actions/authActions'
 
-const URL = 'http://localhost:3000'
 
 class App extends React.Component {
 
@@ -165,7 +164,7 @@ const mapStateToProps = state => {
 }
 
 function mapDispatchToProps(dispatch){
-  return { checkUser: () => dispatch(checkUser()) }
+  return { checkUser: () => dispatch(checkUser()), dispatch: dispatch }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

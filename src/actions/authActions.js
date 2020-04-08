@@ -41,7 +41,7 @@ export const signUpUser = (user) => {
     }
 }
 
-function getUsers(dispatch) {
+export const getUsers = (dispatch) => {
         fetch(URL + '/users',{
             method: 'GET',
             headers: {
@@ -51,6 +51,12 @@ function getUsers(dispatch) {
             })
         .then(resp => resp.json())
         .then(users => dispatch({ type: 'FIRST_USERS', users }))
+}
+
+export const getUsersPub = () => {
+    return (dispatch) => {
+        getUsers(dispatch)
+    }
 }
 
 export const checkUser = () => {

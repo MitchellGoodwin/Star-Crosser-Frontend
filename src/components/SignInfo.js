@@ -12,7 +12,7 @@ class SignInfo extends React.Component{
                     <h1>{sunSign.name}</h1>
                     <p>{`A sign of the ${sunSign.element} element, ${sunSign.name}'s symbol is the ${sunSign.symbol.split(' ')[1]}.`}</p>
                     <p>{`People of the ${sunSign.name} sign are born between ${sunSign.sun_dates[0]} and ${sunSign.sun_dates[1]}.`}</p>
-                    <p>{`This sign is associated with ${sunSign.planet[0]} ${sunSign.planet[1]}.`}</p>
+                    <p>{`This sign is associated with ${sunSign.planet[0]}${sunSign.planet[1] ? ' ' + sunSign.planet[1]: ''}.`}</p>
                     <h1>Main Vibe:</h1>
                     <h3>{sunSign.vibe}</h3>
                     <p>The best ways to describe this sign's characteristics are:</p>

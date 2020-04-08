@@ -5,7 +5,7 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
-// import { loginUser } from '../actions/authActions'
+import { getUsersPub } from '../actions/authActions'
 
 const URL = 'http://localhost:3000'
 
@@ -36,6 +36,7 @@ class Login extends React.Component {
                 localStorage.setItem('auth_token',data.jwt)
             }
             this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+            this.props.getUsersPub()
             this.props.history.push('/')
         })
     }
@@ -69,10 +70,11 @@ class Login extends React.Component {
     }
 }
 
-// const mapDispatchToProps = dispatch => {
-//     // return {
-//     //     loginUser: () => dispatch(loginUser())
-//     // }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        getUsersPub: () => dispatch(getUsersPub()),
+        dispatch: dispatch
+    }
+}
 
-export default connect(null)(withRouter(Login));
+export default connect(null, mapDispatchToProps)(withRouter(Login));

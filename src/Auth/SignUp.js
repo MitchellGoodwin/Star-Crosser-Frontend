@@ -4,6 +4,7 @@ import { Button, Form, Segment, Dropdown } from 'semantic-ui-react'
 import { withRouter } from 'react-router';
 
 import { connect } from 'react-redux';
+import { getUsersPub } from '../actions/authActions'
 
 const URL = 'http://localhost:3000'
 
@@ -41,6 +42,7 @@ class SignUp extends Component {
             if (data.jwt !== 'undefined') {
                 localStorage.setItem('auth_token',data.jwt)
                 this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+                this.props.getUsersPub()
                 this.props.history.push('/')
             }
         })
@@ -181,4 +183,11 @@ class SignUp extends Component {
     }
 }
 
-export default connect(null)(withRouter(SignUp));
+const mapDispatchToProps = dispatch => {
+    return {
+        getUsersPub: () => dispatch(getUsersPub()),
+        dispatch: dispatch
+    }
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(SignUp));

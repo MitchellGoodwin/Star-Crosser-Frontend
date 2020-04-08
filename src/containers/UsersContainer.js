@@ -4,7 +4,6 @@ import UserCard from '../components/UserCard'
 import { connect } from 'react-redux'
 import { getCompata, resetCompata } from '../actions/userActions'
 
-const URL = 'http://localhost:3000'
 
 class UsersContainer extends React.Component{
 

@@ -54,6 +54,10 @@
   
 }
 
+.welcome-text{
+  color: white;
+}
+
 .inbox{
   height: 90vh;
 }
@@ -62,6 +66,7 @@
   height: 80vh;
   border-style: solid;
   padding: 10px;
+  background-color: white;
 }
 
 .inbox-LButtons{
@@ -86,6 +91,7 @@
   height: 70%;
   overflow-y: auto;
   border-style: solid;
+  background-color: white;
 }
 
 .inboxForm{
