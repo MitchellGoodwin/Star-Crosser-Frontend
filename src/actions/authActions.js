@@ -40,3 +40,34 @@ export const signUpUser = (user) => {
         })
     }
 }
+
+function getUsers(dispatch) {
+        fetch(URL + '/users',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('auth_token')
+            }
+            })
+        .then(resp => resp.json())
+        .then(users => dispatch({ type: 'FIRST_USERS', users }))
+}
+
+export const checkUser = () => {
+    return (dispatch) => {
+        dispatch({ type: 'LOADING_USERS' })
+        dispatch({ type: 'ATTEMPT_AUTH'})
+        fetch(URL + `/current`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('auth_token')
+            }
+            })
+            .then(res => res.json())
+            .then(data => {
+                dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+                getUsers(dispatch)
+            })
+    }
+}

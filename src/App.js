@@ -24,6 +24,8 @@ import Sign from './containers/Sign';
 import UsersContainer from './containers/UsersContainer';
 import Inbox from './containers/Inbox';
 
+import { checkUser } from './actions/authActions'
+
 const URL = 'http://localhost:3000'
 
 class App extends React.Component {
@@ -37,17 +39,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     if (localStorage.getItem('auth_token')) {
-      fetch(URL + `/current`,{
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('auth_token')
-        }
-        })
-        .then(res => res.json())
-        .then(data => {
-          this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
-        })
+      this.props.checkUser()
     }
   }
 
@@ -172,4 +164,8 @@ const mapStateToProps = state => {
   return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch){
+  return { checkUser: () => dispatch(checkUser()) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

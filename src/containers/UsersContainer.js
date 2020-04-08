@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Loader, Dimmer } from 'semantic-ui-react'
 import UserCard from '../components/UserCard'
-
+import { connect } from 'react-redux'
+import { getCompata, resetCompata } from '../actions/userActions'
 
 const URL = 'http://localhost:3000'
 
@@ -13,50 +14,42 @@ class UsersContainer extends React.Component{
         compatability: false,
     }
 
-    componentDidMount = () => {
-        fetch(URL + '/users',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('auth_token')
-            }
-            })
-        .then(resp => resp.json())
-        .then(users => {
-            this.setState({users: users, allusers: users})
-        })
-    }
-
     handleClick = () => {
-        !this.state.compatability ? 
-        fetch(URL + '/users',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('auth_token'),
-                'Filter': 'Compatability'
-            }
-            })
-        .then(resp => resp.json())
-        .then(users => {
-            this.setState({users: users, compatability: true})
-        })
-        : this.setState({users: this.state.allusers, compatability: false})
+        !this.props.compatability ? 
+        this.props.getCompata()
+        : this.props.resetCompata()
     }
 
     render() {
         return(
             <div>
-                <Button onClick={() => this.handleClick()}>
-                    {this.state.compatability ? 'Show everybody' : 'Show by my sign compatability'}
-                </Button>
-                <br/> <br/>
-                <Card.Group itemsPerRow='2'>
-                    {this.state.users.map(user => {return <UserCard user={user} />})}
-                </Card.Group>
+            { this.props.loading ?
+            <Dimmer active inverted>
+                <Loader active size='massive'>
+                    Searching the Stars
+                </Loader>
+            </Dimmer> :
+                <div>
+                    <Button onClick={() => this.handleClick()}>
+                        {this.props.compatability ? 'Show everybody' : 'Show by my sign compatability'}
+                    </Button>
+                    <br/> <br/>
+                    <Card.Group itemsPerRow='2'>
+                        {this.props.users.map(user => {return <UserCard user={user} />})}
+                    </Card.Group>
+                </div>
+            }
             </div>
         )
     }
 }
 
-export default UsersContainer
+const mapStateToProps = state => {
+    return { users: state.explore.users, loading: state.explore.loading, compatability: state.explore.compatability }
+}
+
+function mapDispatchToProps(dispatch){
+    return { getCompata: () => dispatch(getCompata()), resetCompata: () => dispatch(resetCompata()) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)

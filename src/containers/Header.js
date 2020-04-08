@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Segment, Menu, Button } from 'semantic-ui-react'
+import { Header, Segment, Menu, Button, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,7 @@ const SiteHeader = (props) => {
     const RenderLoggedIn = (props) => {
         return (
             <Button onClick={() => props.dispatch({type: 'TOGGLE_SIDEBAR'})}>
-                SideBar
+                <Icon name='bars'/>
             </Button>
         )
     }
