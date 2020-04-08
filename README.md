@@ -149,3 +149,19 @@ Stretch Goals:
 * Add restrictions for if not subscribed
 * Add an ability to block users
 * Add uploading photo files
+
+# Order of attack on stretch Goals
+
+1. Add filter form to explore and functionality
+
+2. Filter by distance to user
+
+3. Filter by daily horoscope
+
+4. Add live messaging and notifications with websockets
+
+5. Upload photos, try with AWS
+
+6. Look up full birth chart
+
+7. Add a subscription model with stripe

@@ -28,11 +28,11 @@ class InboxLeft extends React.Component{
                 <Button.Group fluid className='inbox-LButtons'>
                     <Button 
                         color={this.state.toggle === 'likes'? 'green' : 'red'}
-                            onClick={this.handleToggle}>
+                            onClick={this.state.toggle === 'matches' ? this.handleToggle : null}>
                         Likes</Button>
                     <Button 
                         color={this.state.toggle === 'matches'? 'green' : 'red'}
-                            onClick={this.handleToggle}>
+                            onClick={this.state.toggle === 'likes' ? this.handleToggle : null}>
                         Matches</Button>
                 </Button.Group>
                 <div className='inbox-users'>
