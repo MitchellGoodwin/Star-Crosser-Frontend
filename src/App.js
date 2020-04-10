@@ -47,6 +47,14 @@ class App extends React.Component {
 
   handleReceived = (resp) => {
     console.log(resp)
+    if (resp.notification.action === 'Message'){
+      if (parseInt(resp.notification.user.id) === parseInt(this.props.selectedUser.id)) {
+        let messStatus = this.props.canMessage
+        let message = {text: resp.notification.text, receiver: this.props.user}
+        this.props.dispatch({ type: 'ADD_MESSAGE', message: message, canMessage: messStatus})
+
+      }
+    }
   }
 
 
@@ -176,7 +184,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign, user: state.auth.user }
+  return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign, user: state.auth.user, canMessage: state.inbox.canMessage, selectedUser: state.inbox.selectedUser }
 }
 
 function mapDispatchToProps(dispatch){

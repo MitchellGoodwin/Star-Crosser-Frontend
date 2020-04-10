@@ -9,11 +9,8 @@ const URL = 'http://localhost:3000'
 class Inbox extends React.Component{
 
     state = {
-        liked_users: [],
         matched_users: [],
-        selected_user: [],
-        messages: [],
-        canMessage: false,
+        liked_users: [],
         text: ''
     }
 
@@ -30,7 +27,7 @@ class Inbox extends React.Component{
             let messStatus
             (this.state.matched_users.filter(m => parseInt(m.id) === parseInt(user.id)).length === 1) || (messages.filter(message => parseInt(message.receiver.id) === parseInt(user.id) ).length === 0) ?
             messStatus = true : messStatus = false
-            return this.setState({messages: messages, selected_user: user, canMessage: messStatus})
+            this.props.dispatch({ type: 'SET_INBOX_USER', user: user, messages: messages, canMessage: messStatus})
         })
     }
 
@@ -46,18 +43,17 @@ class Inbox extends React.Component{
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('auth_token')
             },
-            body: JSON.stringify({ text: this.state.text, receiver_id: this.state.selected_user.id })
+            body: JSON.stringify({ text: this.state.text, receiver_id: this.props.selected_user.id })
         }).then(resp => resp.json())
         .then(message => {
             let messStatus
-            this.state.matched_users.filter(m => parseInt(m.id) === (parseInt(this.state.selected_user.id))).length === 1 ?
+            this.state.matched_users.filter(m => parseInt(m.id) === (parseInt(this.props.selected_user.id))).length === 1 ?
                 messStatus = true :
                 messStatus = false
-            
+
+            this.props.dispatch({ type: 'ADD_MESSAGE', message: message, canMessage: messStatus})
             this.setState({
-            messages: [...this.state.messages, message],
-            text: '',
-            canMessage: messStatus
+            text: ''
         })
     }
         )
@@ -85,7 +81,7 @@ class Inbox extends React.Component{
                     <InboxLeft liked_users={this.state.liked_users} matched_users={this.state.matched_users} handleSelect={this.handleSelect}/>
                 </Grid.Column>
                 <Grid.Column width='10'>
-                    <InboxRight canMessage={this.state.canMessage} handleChange={this.handleChange} handleSubmit={this.handleSubmit} text={this.state.text} messages={this.state.messages} selected_user={this.state.selected_user}/>
+                    <InboxRight canMessage={this.props.canMessage} handleChange={this.handleChange} handleSubmit={this.handleSubmit} text={this.state.text} messages={this.props.messages} selected_user={this.props.selected_user}/>
 
                 </Grid.Column>
             </Grid>
@@ -95,7 +91,12 @@ class Inbox extends React.Component{
 }
 
 const mapStateToProps = state => {
-    return { currentUser: state.auth.user }
+    return { 
+        currentUser: state.auth.user,
+        messages: state.inbox.messages,
+        selected_user: state.inbox.selectedUser,
+        canMessage: state.inbox.canMessage
+    }
 }
 
 export default connect(mapStateToProps)(Inbox)

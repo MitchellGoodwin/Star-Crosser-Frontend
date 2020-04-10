@@ -18,7 +18,7 @@ const MessageContainer = ({ messages, selected_user }) => {
 
         return(
             <div className='inboxMessages'>
-                {selected_user.id ? <div>
+                {selected_user ? <div>
                 {messages.map(message => <Message message={message} selected_user={selected_user}/>)}
                 </div>
                 
