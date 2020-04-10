@@ -48,7 +48,8 @@ class User extends React.Component{
             })
         .then(resp => resp.json())
         .then(data => {
-            this.setState({likes: data.like, matches: data.match})
+            parseInt(data.like) === 0 ? this.setState({likes: [], matches: [data.match]}) : 
+            this.setState({likes: [data.like], matches: []})
         })
     }
 

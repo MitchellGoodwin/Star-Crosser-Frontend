@@ -23,9 +23,12 @@ import SignInfo from './components/SignInfo';
 import Sign from './containers/Sign';
 import UsersContainer from './containers/UsersContainer';
 import Inbox from './containers/Inbox';
+import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
 
 import { checkUser } from './actions/authActions'
 
+
+const API_WS_ROOT = 'ws://localhost:3000/cable';
 
 class App extends React.Component {
 
@@ -42,11 +45,22 @@ class App extends React.Component {
     }
   }
 
+  handleReceived = (resp) => {
+    console.log(resp)
+  }
+
 
 
   render() {
       return (
         <Router>
+          <ActionCableProvider url={API_WS_ROOT}>
+          <ActionCableConsumer
+        channel={{
+          channel: "NotificationsChannel",
+          user: this.props.user.id
+      }} onReceived={this.handleReceived}
+      >
           <Header/>
           <Sidebar.Pushable style={{height: '100vh'}}>
 
@@ -154,13 +168,15 @@ class App extends React.Component {
                   </div>
           </Sidebar.Pusher>
           </Sidebar.Pushable>
+          </ActionCableConsumer>
+          </ActionCableProvider>
         </Router>
       )
   }
 }
 
 const mapStateToProps = state => {
-  return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign }
+  return { sideBar: state.sideBar.sideBar, sunSign: state.auth.user.sun_sign, user: state.auth.user }
 }
 
 function mapDispatchToProps(dispatch){
