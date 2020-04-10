@@ -13,6 +13,7 @@ import LoginForm from './Auth/LoginForm';
 import Welcome from './components/Welcome'
 import SignUp from './Auth/SignUp'
 import Header from './containers/Header';
+import Footer from './containers/Footer'
 import CheckLogin from './Auth/CheckLogin';
 
 import { Menu, Icon, Sidebar } from 'semantic-ui-react'
@@ -54,6 +55,9 @@ class App extends React.Component {
         this.props.dispatch({ type: 'ADD_MESSAGE', message: message, canMessage: messStatus})
 
       }
+    }
+    if (resp.notification) {
+      this.props.dispatch({type: 'ADD_NOTIFICATION', notification: resp.notification})
     }
   }
 
@@ -176,6 +180,7 @@ class App extends React.Component {
                   </div>
           </Sidebar.Pusher>
           </Sidebar.Pushable>
+          <Footer/>
           </ActionCableConsumer>
           </ActionCableProvider>
         </Router>
