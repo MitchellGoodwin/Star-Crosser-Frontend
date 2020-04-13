@@ -38,13 +38,17 @@ class UserEditForm extends React.Component{
         const user = {...this.props.user}
         user.location = user.city + ', ' + user.state + ', ' + user.country
         e.preventDefault()
+        const formData = new FormData(e.target)
+        formData.append('location', user.location)
         fetch(URL + '/users/' + this.props.oldUser.id,{
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('auth_token')
+                // 'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('auth_token'),
+                "Accept": "application/json"
             },
-            body: JSON.stringify({ user: user })
+            body: formData
+            // body: JSON.stringify({ user: user })
         })
         .then(res => res.json())
         .then(data => {
@@ -65,6 +69,8 @@ class UserEditForm extends React.Component{
                 <h1>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
                 <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised>
+                    <label>Update Profile Picture?</label>
+                    <input type="file" name="image" accept="image/*" />
 
                     <Form.Field>
                         <label>Current City</label>

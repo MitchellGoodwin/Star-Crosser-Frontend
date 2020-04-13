@@ -63,7 +63,7 @@ class UserLeftColumn extends React.Component{
         return(
             <div>
                 <Card>
-                    <Image src={this.props.user.picture} size='large'/>
+                    <Image src={this.props.user.image_url} size='large'/>
                     <Card.Content>
                         <Card.Header>{this.props.user.firstName} {this.props.user.lastName}</Card.Header>
                         <Card.Meta>{this.props.user.age}</Card.Meta>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header, Segment, Dropdown} from 'semantic-ui-react'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
@@ -23,7 +23,7 @@ const Footer = (props) => {
                         notification.action === 'Match' ? 
                         `You've matched with ${notification.user.firstName}!` :
                         null)
-                        return <Dropdown.Item key={notification.id} text={message} image={{ avatar: true, src: notification.user.picture }}/>
+                        return <Link to={'profile/' + notification.user.id}><Dropdown.Item key={notification.id} text={message} image={{ avatar: true, src: notification.user.picture }}/></Link>
                     })}
                 </Dropdown.Menu>
             </Dropdown>
