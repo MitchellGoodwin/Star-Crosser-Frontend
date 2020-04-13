@@ -136,3 +136,47 @@
 .notif-menu{
   min-width: 500px !important;
 }
+
+.FireCard{
+  background-color: red;
+  margin: 0;
+  color: black;
+}
+
+.FireCard:hover{
+  color: white;
+}
+
+.WaterCard{
+  background-color: lightblue;
+  margin: 0;
+  color: black;
+}
+
+.WaterCard:hover{
+  color: white;
+}
+
+.EarthCard{
+  background-color: yellow;
+  margin: 0;
+  color: black;
+}
+
+.EarthCard:hover{
+  color: white;
+}
+
+.AirCard{
+  background-color: lightgreen;
+  margin: 0;
+  color: black;
+}
+
+.AirCard:hover{
+  color: white;
+}
+
+.SignUpForm{
+  width: 80%;
+}

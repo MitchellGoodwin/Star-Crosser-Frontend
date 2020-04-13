@@ -59,8 +59,8 @@ class SignUp extends Component {
         return (
         <span className='form-tag'>
             <h2> SignUp </h2>
-            <Form onSubmit={this.handleSubmit}>
-                <Segment inverted raised size='large'>
+            <Form onSubmit={this.handleSubmit} size='small' className='SignUpForm'>
+                <Segment inverted raised >
                     <Form.Field>
                         <label>Email</label>
                         <input type="text" 
