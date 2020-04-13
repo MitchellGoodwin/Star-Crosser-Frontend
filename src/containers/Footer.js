@@ -23,7 +23,7 @@ const Footer = (props) => {
                         notification.action === 'Match' ? 
                         `You've matched with ${notification.user.firstName}!` :
                         null)
-                        return <Link to={'profile/' + notification.user.id}><Dropdown.Item key={notification.id} text={message} image={{ avatar: true, src: notification.user.picture }}/></Link>
+                        return <Link to={'profile/' + notification.user.id}><Dropdown.Item key={notification.id} text={message} image={{ avatar: true, src: notification.user.image_url }}/></Link>
                     })}
                 </Dropdown.Menu>
             </Dropdown>

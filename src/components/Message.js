@@ -16,7 +16,7 @@ class Message extends React.Component{
                         avatar
                         floated={received ? 'left' : 'right'}
                         size='small'
-                        src={!received ? this.props.currentUser.picture : selected_user.picture}
+                        src={!received ? this.props.currentUser.image_url : selected_user.image_url}
                     />
                     <Card.Description >{message.text}</Card.Description>
                     </Card.Content>

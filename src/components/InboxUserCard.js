@@ -13,7 +13,7 @@ class InboxUserCard extends React.Component {
                         avatar
                         floated='left'
                         size='small'
-                        src={user.picture}
+                        src={user.image_url}
                     />
                     <Card.Header>{user.firstName} {user.lastName}</Card.Header>
                     <Card.Meta>{user.age}</Card.Meta>
