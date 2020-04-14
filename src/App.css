@@ -37,9 +37,9 @@
   }
 } */
 
-/* .header{
-  margin-bottom: 0px;
-} */
+.header{
+  margin-bottom: 0px !important;
+}
 
 /* .sidebar{
   /* position: fixed !important;
@@ -52,13 +52,15 @@
   margin-right: 50px;
   padding-bottom: 150px;
   height: 100% !important;
+  margin-top: 10px;
   
 }
 
+
 .welcome-text{
-  color: white;
   margin: 0 auto;
   max-width: 50em;
+  background-color: grey;
 }
 
 .inbox{
