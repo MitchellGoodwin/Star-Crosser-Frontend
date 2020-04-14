@@ -10,7 +10,6 @@ class Welcome extends React.Component{
         return(
             <div className='welcome-text'>
                 <Segment color='grey'>
-                    {/* Welcome {this.props.user.firstName ? this.props.user.firstName : 'Please Log In or Sign Up!'} */}
                     <h1>Welcome to StarCrosser</h1>
                     <p>The premier dating app for finding your match with the help of the ancient science of Astrology!</p>
                     <Image src="https://66.media.tumblr.com/5654154dba1ade64c67b682c5dee899b/cdf8fc99c7c5816d-aa/s500x750/c67670215fabdff021ddd526ac6477ecf5d08953.gif" fluid/>

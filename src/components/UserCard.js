@@ -9,7 +9,7 @@ class UserCard extends React.Component {
         const { user } = this.props
         const element = user.element
         return(
-            <Card raised fluid>
+            <Card raised style={{width: '45%'}}>
                 <Link to={'profile/' + user.id} style={{ textDecoration: 'none' }} className={element+ 'Card'}>
                     <Card.Content >
                     <Image
@@ -17,6 +17,12 @@ class UserCard extends React.Component {
                         floated='left'
                         size='small'
                         src={user.image_url}
+                    />
+                    <Image
+                    
+                        floated='right'
+                        style={{height: '150px'}}
+                        src={user.sun_sign_image}
                     />
                     <Card.Header>{user.firstName} {user.lastName}</Card.Header>
                     <Card.Meta>{user.age}</Card.Meta>

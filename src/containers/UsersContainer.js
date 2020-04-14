@@ -85,7 +85,7 @@ class UsersContainer extends React.Component{
                         handleChange={this.handleChange} handleToggle={this.handleToggle} handleSubmit={this.handleSubmit}/>
                         : null}
                     <br/> <br/>
-                    <Card.Group itemsPerRow='2'>
+                    <Card.Group itemsPerRow='2' >
                         {this.props.users.map(user => {return <UserCard user={user} />})}
                     </Card.Group>
                 </div>
