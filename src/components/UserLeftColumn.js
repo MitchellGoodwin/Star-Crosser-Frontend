@@ -1,54 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Image, Card, Button, Modal } from 'semantic-ui-react'
+import { Image, Card, Button, Modal, Dimmer, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
+import EditPhoto from './EditPhoto';
 
-const URL = 'http://localhost:3000'
+
 
 class UserLeftColumn extends React.Component{
-
-    handleTakePhoto (dataUri) {
-        var blob = this.dataURItoBlob(dataUri);
-        var fd = new FormData(document.forms[0]);
-        fd.append("image", blob);
-        console.log(fd);
-        fetch(URL + '/users/' + this.props.currentUser.id,{
-            method: 'PATCH',
-            headers: {
-                'Authorization': localStorage.getItem('auth_token'),
-                "Accept": "application/json"
-            },
-            body: fd
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.jwt !== 'undefined') {
-                this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
-            }
-        })
-    }
-
-    dataURItoBlob(dataURI) {
-        // convert base64/URLEncoded data component to raw binary data held in a string
-        var byteString;
-        if (dataURI.split(',')[0].indexOf('base64') >= 0)
-            byteString = atob(dataURI.split(',')[1]);
-        else
-            byteString = unescape(dataURI.split(',')[1]);
-    
-        // separate out the mime component
-        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-    
-        // write the bytes of the string to a typed array
-        var ia = new Uint8Array(byteString.length);
-        for (var i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-        }
-    
-        return new Blob([ia], {type:mimeString});
-    }
 
     
 
@@ -56,10 +15,15 @@ class UserLeftColumn extends React.Component{
 
         const editImage = () => {
             return(
-            <Modal trigger={<Button>Edit Picture?</Button>}>
-                <Camera
-                onTakePhoto = { (dataUri) => { this.handleTakePhoto(dataUri); } }
-                />
+            <Modal trigger={<Button>Take a New Photo</Button>}>
+                {this.props.loading ?
+                    <Dimmer active>
+                    <Loader active size='big'>
+                        Uploading Picture, You Look Great!
+                    </Loader>
+                </Dimmer> : 
+                <EditPhoto></EditPhoto>
+                }
             </Modal>
             )
         }
@@ -115,6 +79,11 @@ class UserLeftColumn extends React.Component{
 
         return(
             <div>
+                { this.props.loading ?
+                    <Dimmer active inverted>
+                        <Loader active >
+                        </Loader>
+                    </Dimmer> :
                 <Card>
                     <Image src={this.props.user.image_url} size='large'/>
                     <Card.Content>
@@ -124,7 +93,7 @@ class UserLeftColumn extends React.Component{
                             {this.props.user.gender} seeking {this.props.user.lookingFor}
                         </Card.Description>
                     </Card.Content>
-                </Card>
+                </Card>}
 
                 {this.props.user.id !== this.props.currentUser.id ?
                 likeMatchComp() : editImage()}
@@ -145,6 +114,7 @@ class UserLeftColumn extends React.Component{
 const mapStateToProps = state => {
     return {
         currentUser: state.auth.user,
+        loading: state.auth.loading
     }
 }
 

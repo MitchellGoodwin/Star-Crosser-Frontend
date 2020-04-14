@@ -69,7 +69,7 @@ class UserEditForm extends React.Component{
                 <h1>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
                 <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised>
-                    <label>Update Profile Picture?</label>
+                    <label>Upload New Profile Picture?</label>
                     <input type="file" name="image" accept="image/*" />
 
                     <Form.Field>

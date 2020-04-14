@@ -77,3 +77,24 @@ export const checkUser = () => {
             })
     }
 }
+
+export const getImage = (fd, id) => {
+    return (dispatch) => {
+        dispatch({ type: 'ATTEMPT_AUTH' })
+        console.log(fd)
+        fetch(URL + '/users/' + id,{
+            method: 'PATCH',
+            headers: {
+                'Authorization': localStorage.getItem('auth_token'),
+                "Accept": "application/json"
+            },
+            body: fd
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.jwt !== 'undefined') {
+                dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+            }
+        })
+    }
+}

@@ -3,7 +3,6 @@ const authReducer = (state = { user: [], loading: false}, action) => {
         case 'ATTEMPT_AUTH':
             return {
             ...state,
-            user: [...state.user],
             loading: true
             }
         case 'AUTH_SUCCESS':
