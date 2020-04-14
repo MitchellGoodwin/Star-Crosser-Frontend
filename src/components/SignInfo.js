@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Loader, Dimmer } from 'semantic-ui-react'
+import { Segment, Loader, Dimmer, Image } from 'semantic-ui-react'
 
 class SignInfo extends React.Component{
     render(){
@@ -9,6 +9,7 @@ class SignInfo extends React.Component{
                 <Dimmer active={!this.props.sunSign}><Loader/></Dimmer>
                 {this.props.sunSign ?
                 <div>
+                    <Image src={sunSign.image_url} floated='right' size='large'/>
                     <h1>{sunSign.name}</h1>
                     <p>{`A sign of the ${sunSign.element} element, ${sunSign.name}'s symbol is the ${sunSign.symbol.split(' ')[1]}.`}</p>
                     <p>{`People of the ${sunSign.name} sign are born between ${sunSign.sun_dates[0]} and ${sunSign.sun_dates[1]}.`}</p>

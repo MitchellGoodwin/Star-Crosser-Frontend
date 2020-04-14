@@ -51,6 +51,6 @@ export const sendFilter = (data) => {
       }
       })
   .then(resp => resp.json())
-  .then(users => dispatch({ type: 'SET_USERS', users }))
+  .then(data => dispatch({ type: 'SET_USERS', users: data.data.map(user => user.attributes) }))
   }
 }

@@ -7,7 +7,7 @@ class UserCard extends React.Component {
     
     render() {
         const { user } = this.props
-        const element = user.sun_sign.element
+        const element = user.element
         return(
             <Card raised fluid>
                 <Link to={'profile/' + user.id} style={{ textDecoration: 'none' }} className={element+ 'Card'}>
@@ -20,7 +20,7 @@ class UserCard extends React.Component {
                     />
                     <Card.Header>{user.firstName} {user.lastName}</Card.Header>
                     <Card.Meta>{user.age}</Card.Meta>
-                    <Card.Meta>{user.sun_sign.name}</Card.Meta>
+                    <Card.Meta>{user.sun_sign_name}</Card.Meta>
                     <Card.Description>
                         {user.location}
                     </Card.Description>

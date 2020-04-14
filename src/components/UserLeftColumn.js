@@ -100,6 +100,7 @@ class UserLeftColumn extends React.Component{
 
                 <Link to={'/sign/'  + (this.props.sun_sign ? this.props.sun_sign.id : '')}>
                     <Card>
+                        <Image src={this.props.sun_sign ? this.props.sun_sign.image_url : null}/>
                         <Card.Content>
                             <Card.Header>{this.props.sun_sign ? this.props.sun_sign.name : null}</Card.Header>
                         </Card.Content>

@@ -50,7 +50,9 @@ export const getUsers = (dispatch) => {
             }
             })
         .then(resp => resp.json())
-        .then(users => dispatch({ type: 'FIRST_USERS', users }))
+        .then(data => {
+            dispatch({ type: 'FIRST_USERS', users: data.data.map(user => user.attributes) })
+        })
 }
 
 export const getUsersPub = () => {

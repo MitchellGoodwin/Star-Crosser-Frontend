@@ -7,7 +7,11 @@ class Welcome extends React.Component{
 
     render() {
         return(
-            <div className='welcome-text'>Welcome {this.props.user.firstName ? this.props.user.firstName : 'Please Log In or Sign Up!'}</div>
+            <div className='welcome-text'>
+                {/* Welcome {this.props.user.firstName ? this.props.user.firstName : 'Please Log In or Sign Up!'} */}
+                <h1>Welcome to StarCrosser</h1>
+                <p>The premier dating app for finding your match with the help of the ancient science of Astrology!</p>
+            </div>
         )
     }
 }

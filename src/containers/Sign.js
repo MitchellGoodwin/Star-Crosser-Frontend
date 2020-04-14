@@ -14,7 +14,7 @@ class Sign extends React.Component{
     componentDidMount = () => {
         fetch(URL + '/sun_signs/' + this.props.match.params.id)
         .then(resp => resp.json())
-        .then(sign => this.setState({sign: sign}))
+        .then(sign => this.setState({sign: sign.sign}))
     }
     
     render(){
