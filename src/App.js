@@ -27,6 +27,7 @@ import Inbox from './containers/Inbox';
 import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
 
 import { checkUser } from './actions/authActions'
+import NotificationsContainer from './containers/NotificationsContainer';
 
 
 const API_WS_ROOT = 'ws://localhost:3000/cable';
@@ -122,6 +123,13 @@ class App extends React.Component {
               </Menu.Item>
             </Link>
 
+            <Link to='/notifications'>
+              <Menu.Item>
+                <Icon name='list' />
+                All Notifications
+              </Menu.Item>
+            </Link>
+
             <Link to='/logout'>
               <Menu.Item>
                 <Icon name='sign-out' />
@@ -162,6 +170,10 @@ class App extends React.Component {
 
                   <Route exact path='/inbox' component={() => {
                       return <CheckLogin component={Inbox} />
+                      }} />
+
+                  <Route exact path='/notifications' component={() => {
+                      return <CheckLogin component={NotificationsContainer} />
                       }} />
 
                   <Route exact path='/logout' component={() => {

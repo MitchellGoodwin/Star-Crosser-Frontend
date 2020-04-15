@@ -139,6 +139,12 @@
 
 .notif-menu{
   min-width: 500px !important;
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
+.notif-menu-item{
+  padding-bottom: 15px;
 }
 
 .FireCard{

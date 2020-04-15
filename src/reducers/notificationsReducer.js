@@ -1,9 +1,18 @@
-const notificationsReducer = (state = { notifications: [], read: false}, action) => {
+const notificationsReducer = (state = { notifications: [], allNotifications: [], read: true}, action) => {
     switch(action.type) {
+        case 'SET_NOTIFICATIONS':
+            return {
+                ...state,
+                notifications: [...action.notifications],
+                allNotifications: [...action.allNotifications],
+                read: (action.notifications.length > 0 ? false : true)
+            }
         case 'ADD_NOTIFICATION':
             return {
                 ...state,
-                notifications: [ action.notification, ...state.notifications ]
+                notifications: [ action.notification, ...state.notifications ],
+                allNotifications: [ action.allNotification, ...state.allNotifications ],
+                read: false
             }
         case 'READ_NOTIFICATIONS':
             return {

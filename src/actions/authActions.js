@@ -74,7 +74,9 @@ export const checkUser = () => {
             })
             .then(res => res.json())
             .then(data => {
+                let newNotif = data.notifications.filter(notif => !notif.read)
                 dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+                dispatch({ type: 'SET_NOTIFICATIONS', notifications: newNotif, allNotifications: data.notifications})
                 getUsers(dispatch)
             })
     }

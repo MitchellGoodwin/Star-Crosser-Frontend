@@ -3,15 +3,29 @@ import { Header, Segment, Dropdown} from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+const URL = 'http://localhost:3000'
 
 const Footer = (props) => {
 
+
+    const handleOpen = () => {
+        fetch(URL + '/readall',{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('auth_token')
+            }
+            })
+        .then(resp => resp.json())
+        .then(data => props.dispatch({ type: 'READ_NOTIFICATIONS'}))
+    }
+
     const RenderLoggedIn = () => {
 
-        const numNotif = props.notifications.length > 0 ? `${props.notifications.length} Notification${props.notifications.length > 1 ? 's': ''}  ` : null
+        const numNotif = !props.read ? `${props.notifications.length} Notification${props.notifications.length > 1 ? 's': ''}  ` : null
 
         return (
-            <Dropdown floating labeled direction='left' icon='bell' button text={numNotif}>
+            <Dropdown onOpen={() => handleOpen()} floating labeled upward direction='left' icon='bell' button text={numNotif}>
                 <Dropdown.Menu className='notif-menu'>
                     <Dropdown.Header>Notifications: </Dropdown.Header>
                     {props.notifications.map(notification => {
@@ -23,7 +37,7 @@ const Footer = (props) => {
                         notification.action === 'Match' ? 
                         `You've matched with ${notification.user.firstName}!` :
                         null)
-                        return <Link to={'profile/' + notification.user.id}><Dropdown.Item key={notification.id} text={message} image={{ avatar: true, src: notification.user.image_url }}/></Link>
+                        return <Link to={'profile/' + notification.user.id}><Dropdown.Item className='notif-menu-item' key={notification.id} text={message} image={{ avatar: true, src: notification.user.image_url }}/></Link>
                     })}
                 </Dropdown.Menu>
             </Dropdown>
@@ -59,7 +73,7 @@ const Footer = (props) => {
 }
 
 const mapStateToProps = state => {
-    return { user: state.auth.user, notifications: state.notifications.notifications }
+    return { user: state.auth.user, notifications: state.notifications.notifications, read: state.notifications.read }
 }
 
 export default connect(mapStateToProps)(Footer)
