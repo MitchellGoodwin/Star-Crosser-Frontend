@@ -70,6 +70,12 @@ class Inbox extends React.Component{
         .then(resp => resp.json())
         .then(data => {
             this.setState({liked_users: data.liked_users, matched_users: data.matched_users})
+            if (this.props.selected_user) {
+                let messStatus
+                (this.state.matched_users.filter(m => parseInt(m.id) === parseInt(this.props.selected_user.id)).length === 1) || (this.props.messages.filter(message => parseInt(message.receiver.id) === parseInt(this.props.selected_user.id) ).length === 0) ?
+                messStatus = true : messStatus = false
+                this.props.dispatch({ type: 'SET_INBOX_USER', user: this.props.selected_user, messages: this.props.messages, canMessage: messStatus})
+            }
         })
     }
 
