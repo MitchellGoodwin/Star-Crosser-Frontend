@@ -11,7 +11,7 @@ const notificationsReducer = (state = { notifications: [], allNotifications: [],
             return {
                 ...state,
                 notifications: [ action.notification, ...state.notifications ],
-                allNotifications: [ action.allNotification, ...state.allNotifications ],
+                allNotifications: [ action.notification, ...state.allNotifications ],
                 read: false
             }
         case 'READ_NOTIFICATIONS':
