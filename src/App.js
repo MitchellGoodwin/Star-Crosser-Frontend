@@ -34,6 +34,14 @@ const API_WS_ROOT = 'ws://localhost:3000/cable';
 
 class App extends React.Component {
 
+  state = {
+    welcome: false
+  }
+
+  toggleWelcome = () => {
+    this.setState({welcome: !this.state.welcome})
+  }
+
 
   handleLogout = () => {
     localStorage.clear()
@@ -141,10 +149,11 @@ class App extends React.Component {
             </Sidebar>
 
             <Sidebar.Pusher dimmed={this.props.sideBar} onClick={this.props.sideBar ? () => this.props.dispatch({type: 'TOGGLE_SIDEBAR'}) : null}>
+              <div className={this.state.welcome ? 'welcome-background' : 'background'}>
                   <div className='body-app' >
                 <Switch>
                   <Route exact path='/' component={() => {
-                      return <Welcome />
+                      return <Welcome welcome={this.state.welcome} toggleWelcome={this.toggleWelcome}/>
                       }} />
 
                   <Route exact path='/login' component={() => {
@@ -190,6 +199,7 @@ class App extends React.Component {
                   </Route>
                 </Switch>
                   </div>
+                </div>
           </Sidebar.Pusher>
           </Sidebar.Pushable>
           <Footer/>

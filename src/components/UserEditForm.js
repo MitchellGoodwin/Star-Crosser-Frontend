@@ -66,7 +66,7 @@ class UserEditForm extends React.Component{
                 <Dimmer active={!this.props.initialValues}>
                         <Loader active={!this.props.initialValues} size='massive'/>
                 </Dimmer>
-                <h1>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
+                <h1 style={{color: 'white'}}>Fill out your profile info:</h1> <Link to={'/profile/' + this.props.user.id}><Button>Preview Profile</Button></Link>
                 <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised>
                     <label>Upload New Profile Picture?</label>

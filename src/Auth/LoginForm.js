@@ -35,7 +35,9 @@ class Login extends React.Component {
             if (data.jwt !== 'undefined') {
                 localStorage.setItem('auth_token',data.jwt)
             }
+            let newNotif = data.notifications.filter(notif => !notif.read)
             this.props.dispatch({ type: 'AUTH_SUCCESS', user: data.user})
+            this.props.dispatch({ type: 'SET_NOTIFICATIONS', notifications: newNotif, allNotifications: data.notifications})
             this.props.getUsersPub()
             this.props.history.push('/')
         })
@@ -45,8 +47,8 @@ class Login extends React.Component {
         return (
         <span className='form-tag'>
             <h2> Login </h2>
-            <Form onSubmit={this.handleSubmit}>
-                <Segment inverted raised size='large'>
+            <Form className='authForm' onSubmit={this.handleSubmit}>
+                <Segment style={{'background-color': '#191970'}} raised size='large'>
                     <Form.Field>
                         <input type="text" 
                             name='email' 
